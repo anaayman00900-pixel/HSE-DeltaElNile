@@ -10,8 +10,7 @@ excel_file = "Delta_Nile_HSE_Management_System_V2 (Recovered).xlsm" # تأكد �
 @st.cache_data
 def load_data(file_path):
     xls = pd.ExcelFile(file_path)
-    return {sheet: xls.parse(sheet) for sheet in xls.sheet_names}
-
+return {sheet: xls.parse(sheet, header=3) for sheet in xls.sheet_names}
 try:
     data_sheets = load_data(excel_file)
     st.sidebar.success("تم تحميل البيانات بنجاح! ✅")
