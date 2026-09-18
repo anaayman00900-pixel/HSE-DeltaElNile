@@ -6,10 +6,21 @@ st.set_page_config(page_title="HSE Management System", page_icon="📊", layout=
 st.title("📊 لوحة تحكم نظام السلامة والصحة المهنية")
 
 excel_file = "Delta_Nile_HSE_Management_System_V2 (Recovered).xlsm"
+
 @st.cache_data
 def load_data(file_path):
     xls = pd.ExcelFile(file_path)
-    return {sheet: xls.parse(sheet, header=3) for sheet in xls.sheet_names}
+    sheets_data = {}
+    for sheet in xls.sheet_names:
+        try:
+            # قراءة الشيت بشكل مرن دون إجبار هيدر معين لتفادي أخطاء الشيتات القصيرة
+            df = xls.parse(sheet)
+            # تنظيف الأعمدة والصفوف الفارغة تماماً
+            df = df.dropna(how='all').dropna(axis=1, how='all')
+            sheets_data[sheet] = df
+        except Exception as e:
+            continue
+    return sheets_data
 
 try:
     data_sheets = load_data(excel_file)
