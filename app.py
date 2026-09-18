@@ -5,7 +5,7 @@ import plotly.express as px
 st.set_page_config(page_title="HSE Management System", page_icon="📊", layout="wide")
 st.title("📊 لوحة تحكم نظام السلامة والصحة المهنية")
 
-excel_file = "Delta_Nile_HSE_Management_System_V2 (Reco...xlsx" # تأكد من مطابقة اسم ملف الإكسيل بالضبط
+excel_file = "Delta_Nile_HSE_Management_System_V2 (Recovered).xlsm" # تأكد من مطابقة اسم ملف الإكسيل بالضبط
 
 @st.cache_data
 def load_data(file_path):
